@@ -125,7 +125,7 @@
 
     <!-- 主视觉区域 / Hero Section -->
     <section class="relative bg-slate-900 text-white py-24 px-4 overflow-hidden">
-        <!-- 背景图片占位符 -->
+        <!-- 背景图片占位 -->
         <div class="absolute inset-0 opacity-15 bg-cover bg-center" style="background-image: url('./images/hero-bg.png');"></div>
         
         <div class="relative max-w-5xl mx-auto text-center z-10">
@@ -171,7 +171,7 @@
 
                 <p>
                     <span class="lang-en"><strong>Vantage Supply LLC</strong> is an independent sourcing service provider and wholesale distributor of electronic components based in Sammamish, Washington. We do not claim to hold massive, unverified in-house inventory. Instead, we act as a highly efficient, agile procurement desk that delivers results based on real, verifiable supply chain networks.</span>
-                    <span class="lang-zh hidden"><strong>Vantage Supply LLC</strong> 是一于华盛顿州萨马米什的独立电子元器件代采及分销服务商。我们不虚报海量假库存，而是立足于真实、可追溯的全球分销渠道网络，为客户提供极速响应、公开透明的按需代采服务。</span>
+                    <span class="lang-zh hidden"><strong>Vantage Supply LLC</strong> 是一家位于华盛顿州萨马米什的独立电子元器件代采及分销服务商。我们不虚报海量假库存，而是立足于真实、可追溯的全球分销渠道网络，为客户提供极速响应、公开透明的按需代采服务。</span>
                 </p>
                 <p>
                     <span class="lang-en">Our business is simple and entirely client-driven: <strong>We handle your on-demand requests.</strong> Whether you are searching for specific microchips, standard semiconductors, memory solutions, or passive components, we use our relationships with major global suppliers and open-market channels to find you the best pricing and legitimate stock.</span>
@@ -267,28 +267,34 @@
                     <span class="lang-zh hidden">提交采购询价</span>
                 </h2>
                 <p class="text-slate-500 mt-2 text-xs md:text-sm">
-                    <span class="lang-en">Fill out the form below. It will automatically compile your requirements and generate an email directly to <strong>info@vantagesupply.us</strong>.</span>
+                    <span class="lang-en">Fill out the form below. It will automatically compile your requirements and deliver them directly to our inbox.</span>
                     <span class="lang-zh hidden">请填写下方表单。提交后系统将自动整合您的需求，直接向 <strong>info@vantagesupply.us</strong> 发送正式询价邮件。</span>
                 </p>
                 <div class="w-12 h-1 bg-brand-blue mx-auto mt-3"></div>
             </div>
 
-            <!-- RFQ 表单 -->
-            <form onsubmit="handleRealRFQSubmit(event)" class="space-y-5 text-sm">
+            <!-- RFQ 表单 (接入 Web3Forms) -->
+            <form id="rfq-form" onsubmit="handleWeb3FormSubmit(event)" class="space-y-5 text-sm">
+                
+                <!-- Web3Forms 密钥与安全防御机制 -->
+                <input type="hidden" name="access_key" value="662e632a-e5eb-4eb0-a667-6f6eb9c68955">
+                <input type="hidden" name="subject" value="New Sourcing Inquiry (RFQ) - Vantage Supply">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
                 <div class="grid md:grid-cols-2 gap-5">
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">
                             <span class="lang-en">Company Name *</span>
                             <span class="lang-zh hidden">公司名称 *</span>
                         </label>
-                        <input type="text" id="rfq-company" required placeholder="Company LLC / 某某技术公司" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                        <input type="text" name="Company Name" required placeholder="Company LLC / 某某技术公司" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                     </div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">
                             <span class="lang-en">Contact Name *</span>
                             <span class="lang-zh hidden">联系人姓名 *</span>
                         </label>
-                        <input type="text" id="rfq-name" required placeholder="e.g. John Doe / 张经理" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                        <input type="text" name="Contact Name" required placeholder="e.g. John Doe / 张经理" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                     </div>
                 </div>
 
@@ -298,14 +304,14 @@
                             <span class="lang-en">Email *</span>
                             <span class="lang-zh hidden">邮箱地址 *</span>
                         </label>
-                        <input type="email" id="rfq-email" required placeholder="buyer@company.com" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                        <input type="email" name="Email Address" required placeholder="buyer@company.com" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                     </div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">
                             <span class="lang-en">Phone *</span>
                             <span class="lang-zh hidden">电话 *</span>
                         </label>
-                        <input type="text" id="rfq-phone" required placeholder="(401) 339-5938" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                        <input type="text" name="Phone Number" required placeholder="(401) 339-5938" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                     </div>
                 </div>
 
@@ -317,15 +323,15 @@
                     <div class="grid md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase">Part Number *</label>
-                            <input type="text" id="rfq-pn" required placeholder="e.g. Nvidia Jetson Nano" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                            <input type="text" name="Requested Part Number" required placeholder="e.g. Nvidia Jetson Nano" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase">Quantity *</label>
-                            <input type="number" id="rfq-qty" required placeholder="100" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                            <input type="number" name="Requested Quantity" required placeholder="100" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1 uppercase">Brand (Optional)</label>
-                            <input type="text" id="rfq-brand" placeholder="e.g. Nvidia" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                            <input type="text" name="Manufacturer/Brand" placeholder="e.g. Nvidia" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                         </div>
                     </div>
                 </div>
@@ -335,33 +341,38 @@
                         <span class="lang-en">Specifications / Description</span>
                         <span class="lang-zh hidden">详细描述 / 备注要求</span>
                     </label>
-                    <textarea id="rfq-details" rows="4" placeholder="Mention specific date codes, package style, lead-time flexibility, target price or any other details..." class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue"></textarea>
+                    <textarea name="Sourcing Details / Specifications" rows="4" placeholder="Mention specific date codes, package style, lead-time flexibility, target price or any other details..." class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue"></textarea>
                 </div>
 
-                <div class="flex items-start space-x-2 text-xs text-slate-500">
-                    <input type="checkbox" required id="consent" class="mt-1">
-                    <label for="consent">
-                        <span class="lang-en">I understand that submitting this form will draft an email to Vantage Supply. I will click 'Send' in my mail app to complete the request.</span>
-                        <span class="lang-zh hidden">我已知悉：提交此表单将自动生成邮件草稿。我需要在调起的邮件程序中点击“发送”来正式递交需求。</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="w-full bg-brand-navy hover:bg-slate-700 text-white font-bold py-3.5 rounded transition shadow-md">
-                    <span class="lang-en"><i class="fa-solid fa-envelope mr-1"></i> Generate RFQ Email</span>
-                    <span class="lang-zh hidden"><i class="fa-solid fa-envelope mr-1"></i> 生成询价邮件</span>
+                <button type="submit" id="submit-btn" class="w-full bg-brand-navy hover:bg-slate-700 text-white font-bold py-3.5 rounded transition shadow-md flex items-center justify-center gap-2">
+                    <span class="lang-en"><i class="fa-solid fa-paper-plane mr-1"></i> Send RFQ Inquiry</span>
+                    <span class="lang-zh hidden"><i class="fa-solid fa-paper-plane mr-1"></i> 发送询价需求</span>
                 </button>
             </form>
 
-            <!-- 提交成功状态提醒 -->
+            <!-- 异步提交状态提醒 (成功) -->
             <div id="rfq-success" class="hidden mt-4 p-4 bg-green-50 border border-green-200 text-green-800 rounded text-xs">
                 <p class="font-bold flex items-center mb-1">
                     <i class="fa-solid fa-circle-check text-base mr-2 text-green-600"></i>
-                    <span class="lang-en">Email successfully generated!</span>
-                    <span class="lang-zh hidden">邮件草稿已成功生成！</span>
+                    <span class="lang-en">Inquiry Sent Successfully!</span>
+                    <span class="lang-zh hidden">询价申请已成功发送！</span>
                 </p>
                 <p>
-                    <span class="lang-en">We have opened your system's email application. Please review and hit <strong>Send</strong>. If your email client did not open automatically, you can manually email your requirements to: <strong>info@vantagesupply.us</strong>.</span>
-                    <span class="lang-zh hidden">我们已拉起您设备上的默认邮件软件。请在弹出的窗口中确认并点击<strong>发送</strong>。如果您的邮件客户端未能自动调起，亦可手动将需求发送至：<strong>info@vantagesupply.us</strong>。</span>
+                    <span class="lang-en">Thank you for contacting Vantage Supply. Our sourcing team has received your request and will get back to you shortly at the provided email.</span>
+                    <span class="lang-zh hidden">感谢您联系 Vantage Supply。我们的采购团队已经收到您的询价清单，并会尽快通过您留下的联系方式为您报价。</span>
+                </p>
+            </div>
+
+            <!-- 异步提交状态提醒 (失败) -->
+            <div id="rfq-error" class="hidden mt-4 p-4 bg-red-50 border border-red-200 text-red-800 rounded text-xs">
+                <p class="font-bold flex items-center mb-1">
+                    <i class="fa-solid fa-triangle-exclamation text-base mr-2 text-red-600"></i>
+                    <span class="lang-en">Failed to Send Inquiry</span>
+                    <span class="lang-zh hidden">发送询价失败</span>
+                </p>
+                <p>
+                    <span class="lang-en">Something went wrong. Please check your internet connection or email your specifications directly to <strong>info@vantagesupply.us</strong>.</span>
+                    <span class="lang-zh hidden">网络好像遇到了一些问题。如果无法自动提交，请直接将您的需求发送至邮箱：<strong>info@vantagesupply.us</strong>。</span>
                 </p>
             </div>
         </div>
@@ -468,58 +479,68 @@
             }
         }
 
-        // 真实的 RFQ 发送逻辑：自动生成邮件模板并拉起本地客户端
-        function handleRealRFQSubmit(event) {
-            event.preventDefault(); // 阻止表单跳转刷新
+        // 全自动、异步（AJAX）询价邮件表单提交系统
+        function handleWeb3FormSubmit(event) {
+            event.preventDefault(); // 阻止表单提交刷新页面
 
-            const company = document.getElementById('rfq-company').value.trim();
-            const name = document.getElementById('rfq-name').value.trim();
-            const email = document.getElementById('rfq-email').value.trim();
-            const phone = document.getElementById('rfq-phone').value.trim();
-            const partNumber = document.getElementById('rfq-pn').value.trim();
-            const qty = document.getElementById('rfq-qty').value;
-            const brand = document.getElementById('rfq-brand').value.trim();
-            const details = document.getElementById('rfq-details').value.trim();
+            const form = document.getElementById('rfq-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const successBox = document.getElementById('rfq-success');
+            const errorBox = document.getElementById('rfq-error');
 
-            const targetEmail = "info@vantagesupply.us";
-            const subject = encodeURIComponent(`Inquiry (RFQ) from ${company} for P/N: ${partNumber}`);
-            
-            // 拼接标准的双语格式化邮件正文
-            const emailBody = encodeURIComponent(
-`DEAR VANTAGE SUPPLY SALES TEAM,
+            // 重置状态
+            successBox.classList.add('hidden');
+            errorBox.classList.add('hidden');
 
-WE WOULD LIKE TO FORMALLY SUBMIT AN ON-DEMAND SOURCING REQUEST (RFQ) FOR THE FOLLOWING ITEMS:
+            // 禁用按钮并显示加载动画
+            submitBtn.disabled = true;
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.innerHTML = `
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="lang-en">Sending...</span>
+                <span class="lang-zh hidden">正在发送...</span>
+            `;
+            // 手动调用语言切换，确保加载文字跟当前语言对应
+            if (currentLang === 'zh') {
+                submitBtn.querySelector('.lang-en').classList.add('hidden');
+                submitBtn.querySelector('.lang-zh').classList.remove('hidden');
+            }
 
---------------------------------------------------
-[1] BUYER INFORMATION
-- Company: ${company}
-- Contact Name: ${name}
-- Email: ${email}
-- Phone: ${phone}
+            const formData = new FormData(form);
 
-[2] COMPONENT SPECIFICATION
-- Part Number (规格型号): ${partNumber}
-- Requested Quantity (采购数量): ${qty} PCS
-- Preferred Brand/Manufacturer (原厂品牌): ${brand || "Any reliable brand"}
-
-[3] SPECIAL SPECIFICATIONS & DETAILS (详细备注需求):
-- Notes: ${details || "No special requirements. Standard packaging required."}
---------------------------------------------------
-
-PLEASE PROVIDE AN ACCURATE QUOTE WITH PRICE PER UNIT, ESTIMATED LEAD TIMES, AND SHIPPING CRITERIA.
-
-SINCERELY,
-${name}
-${company}`
-            );
-
-            // 调起系统客户端 mailto
-            window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${emailBody}`;
-
-            // 显示友好成功提示
-            const successContainer = document.getElementById('rfq-success');
-            successContainer.classList.remove('hidden');
-            successContainer.scrollIntoView({ behavior: 'smooth' });
+            // 发起异步提交
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    // 成功：显示成功提示并清空表单
+                    successBox.classList.remove('hidden');
+                    form.reset();
+                    successBox.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    // 接口反馈错误
+                    console.log(json);
+                    errorBox.classList.remove('hidden');
+                    errorBox.scrollIntoView({ behavior: 'smooth' });
+                }
+            })
+            .catch(error => {
+                // 网络错误
+                console.log(error);
+                errorBox.classList.remove('hidden');
+                errorBox.scrollIntoView({ behavior: 'smooth' });
+            })
+            .finally(() => {
+                // 恢复提交按钮
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+            });
         }
     </script>
 </body>
