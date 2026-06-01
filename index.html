@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 默认英文标题，符合 ICSource 审核偏好 -->
+    <!-- 默认英文标题 -->
     <title>Vantage Supply LLC | Professional On-Demand Electronics Sourcing</title>
     <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,7 +57,7 @@
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <!-- 公司 LOGO & 名称 -->
-            <a href="#" class="flex items-center space-x-3">
+            <a href="#" class="flex items-center space-x-3 flex-shrink-0">
                 <div class="bg-brand-navy p-2 rounded text-white">
                     <i class="fa-solid fa-microchip text-xl"></i>
                 </div>
@@ -67,8 +67,8 @@
                 </div>
             </a>
             
-            <!-- 桌面端菜单 / Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+            <!-- 桌面端菜单链接 (在中大尺寸屏幕下显示) -->
+            <nav class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-semibold text-slate-600">
                 <a href="#who-we-are" class="hover:text-brand-blue transition">
                     <span class="lang-en">Who We Are</span>
                     <span class="lang-zh hidden">关于我们</span>
@@ -85,22 +85,18 @@
                     <span class="lang-en">Contact</span>
                     <span class="lang-zh hidden">联系我们</span>
                 </a>
-                
-                <!-- 极简双语状态切换器 (桌面端) -->
-                <div class="flex items-center border border-slate-300 rounded bg-slate-100 p-0.5">
-                    <button onclick="setLanguage('en')" id="lang-btn-en" class="px-2.5 py-1 rounded text-xs font-bold bg-brand-blue text-white transition">EN</button>
-                    <button onclick="setLanguage('zh')" id="lang-btn-zh" class="px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900 transition">中文</button>
-                </div>
-            </div>
+            </nav>
             
-            <!-- 移动端控制区 -->
-            <div class="flex items-center space-x-3 md:hidden">
-                <!-- 极简双语状态切换器 (移动端) -->
-                <div class="flex items-center border border-slate-300 rounded bg-slate-100 p-0.5">
-                    <button onclick="setLanguage('en')" id="lang-btn-en-mobile" class="px-2 py-0.5 rounded text-[10px] font-bold bg-brand-blue text-white transition">EN</button>
-                    <button onclick="setLanguage('zh')" id="lang-btn-zh-mobile" class="px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 transition">中文</button>
+            <!-- 右侧公共功能区 (全局可见，不因设备缩放隐藏) -->
+            <div class="flex items-center space-x-4 flex-shrink-0">
+                <!-- 醒目双语并排切换标签器 -->
+                <div class="flex items-center space-x-1 bg-slate-100 p-1 rounded-md border border-slate-200 text-xs font-bold">
+                    <button id="lang-en-btn" onclick="setLanguage('en')" class="px-2.5 py-1 rounded transition bg-brand-blue text-white">EN</button>
+                    <button id="lang-zh-btn" onclick="setLanguage('zh')" class="px-2.5 py-1 rounded transition text-slate-600 hover:bg-slate-200">中文</button>
                 </div>
-                <button onclick="toggleMobileMenu()" class="text-brand-dark focus:outline-none">
+                
+                <!-- 移动端菜单开关 (仅在移动端显示) -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-brand-dark focus:outline-none">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
@@ -128,11 +124,11 @@
     </header>
 
     <!-- 主视觉区域 / Hero Section -->
-    <section class="relative bg-slate-900 text-white py-20 px-4 overflow-hidden">
-        <!-- 【已修改】将 hero-bg.jpg 更改为 hero-bg.png -->
+    <section class="relative bg-slate-900 text-white py-24 px-4 overflow-hidden">
+        <!-- 背景图片占位符 -->
         <div class="absolute inset-0 opacity-15 bg-cover bg-center" style="background-image: url('./images/hero-bg.png');"></div>
         
-        <div class="relative max-w-5xl mx-auto text-center">
+        <div class="relative max-w-5xl mx-auto text-center z-10">
             <span class="text-xs uppercase tracking-widest font-bold text-brand-accent bg-blue-950/80 border border-blue-900 px-3 py-1.5 rounded-full mb-6 inline-block">
                 <span class="lang-en">Your On-Demand Semiconductor Procurement Desk</span>
                 <span class="lang-zh hidden">您的按需半导体代采服务台</span>
@@ -161,39 +157,44 @@
         </div>
     </section>
 
-    <!-- 谁是 Vantage Supply (Who We Are) -->
-    <section id="who-we-are" class="py-16 px-4 bg-white border-b border-slate-200">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
-                    <span class="lang-en">Who We Are</span>
-                    <span class="lang-zh hidden">关于我们</span>
-                </h2>
-                <div class="w-12 h-1 bg-brand-blue mx-auto mt-3"></div>
-            </div>
-
-            <!-- 图文并排排版 -->
-            <div class="grid md:grid-cols-12 gap-10 items-center">
-                <div class="md:col-span-7 space-y-6 text-slate-600 leading-relaxed text-sm md:text-base">
-                    <p>
-                        <span class="lang-en"><strong>Vantage Supply LLC</strong> is an independent sourcing service provider and wholesale distributor of electronic components based in Sammamish, Washington. We do not claim to hold massive, unverified in-house inventory. Instead, we act as a highly efficient, agile procurement desk that delivers results based on real, verifiable supply chain networks.</span>
-                        <span class="lang-zh hidden"><strong>Vantage Supply LLC</strong> 是一家位于华盛顿州萨马米什的独立电子元器件代采及分销服务商。我们不虚报海量假库存，而是立足于真实、可追溯的全球分销渠道网络，为客户提供极速响应、公开透明的按需代采服务。</span>
-                    </p>
-                    <p>
-                        <span class="lang-en">Our business is simple and entirely client-driven: <strong>We handle your on-demand requests.</strong> Whether you are searching for specific microchips, standard semiconductors, memory solutions, or passive components, we use our relationships with major global suppliers and open-market channels to find you the best pricing and legitimate stock.</span>
-                        <span class="lang-zh hidden">我们的核心业务非常简单务实：<strong>按需响应客户的采购需求。</strong> 无论您是寻找特定半导体、各类通用元器件、还是企业级内存条/存储模块，我们都会利用全球正规分销网络，为您锁定极具价格竞争力且品质安全的可靠货源。</span>
-                    </p>
-                    <p>
-                        <span class="lang-en">From specialized components (like high-frequency RF devices, microwave transistors, and embedded compute platforms) to everyday passive parts, we support small-batch prototyping as well as volume production.</span>
-                        <span class="lang-zh hidden">从特定嵌入式计算板（如 GPU 算力模块）到高频微波器件（如 FSX001X 系列），再到日常通用的电子零部件，我们均能提供合规稳定的代采与配送支持。</span>
-                    </p>
+    <!-- 关于我们 (Who We Are) -->
+    <section id="who-we-are" class="py-20 px-4 bg-white border-b border-slate-200">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-slate-600 leading-relaxed text-sm md:text-base">
+                <div class="text-left">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
+                        <span class="lang-en">Who We Are</span>
+                        <span class="lang-zh hidden">关于我们</span>
+                    </h2>
+                    <div class="w-12 h-1 bg-brand-blue mt-3"></div>
                 </div>
-                
-                <!-- 【已修改】将 sourcing.jpg 更改为 sourcing.png 并保留备用降级逻辑 -->
-                <div class="md:col-span-5">
-                    <div class="rounded-xl overflow-hidden border border-slate-200 shadow-md bg-slate-50 aspect-video md:aspect-square relative">
-                        <img src="./images/sourcing.png" alt="Vantage Supply Sourcing" onerror="this.onerror=null; this.src='https://placehold.co/600x600/1e293b/ffffff?text=Vantage+Supply+Sourcing'" class="w-full h-full object-cover">
-                    </div>
+
+                <p>
+                    <span class="lang-en"><strong>Vantage Supply LLC</strong> is an independent sourcing service provider and wholesale distributor of electronic components based in Sammamish, Washington. We do not claim to hold massive, unverified in-house inventory. Instead, we act as a highly efficient, agile procurement desk that delivers results based on real, verifiable supply chain networks.</span>
+                    <span class="lang-zh hidden"><strong>Vantage Supply LLC</strong> 是一于华盛顿州萨马米什的独立电子元器件代采及分销服务商。我们不虚报海量假库存，而是立足于真实、可追溯的全球分销渠道网络，为客户提供极速响应、公开透明的按需代采服务。</span>
+                </p>
+                <p>
+                    <span class="lang-en">Our business is simple and entirely client-driven: <strong>We handle your on-demand requests.</strong> Whether you are searching for specific microchips, standard semiconductors, memory solutions, or passive components, we use our relationships with major global suppliers and open-market channels to find you the best pricing and legitimate stock.</span>
+                    <span class="lang-zh hidden">我们的核心业务非常简单务实：<strong>按需响应客户的采购需求。</strong> 无论您是寻找特定半导体、各类通用元器件、还是企业级内存条/存储模块，我们都会利用全球正规分销网络，为您锁定极具价格竞争力且品质安全的可靠货源。</span>
+                </p>
+                <p>
+                    <span class="lang-en">From specialized components (like high-frequency RF devices, microwave transistors, and embedded compute platforms) to everyday passive parts, we support small-batch prototyping as well as volume production.</span>
+                    <span class="lang-zh hidden">从特定嵌入式计算板（如 GPU 算力模块）到高频微波器件（如 FSX001X 系列），再到日常通用的电子零部件，我们均能提供合规稳定的代采与配送支持。</span>
+                </p>
+            </div>
+            
+            <!-- 工作配图区域 -->
+            <div class="relative rounded-xl overflow-hidden shadow-md border border-slate-100 h-80 bg-slate-100">
+                <img src="./images/sourcing.png" alt="Sourcing operations" onerror="this.style.display='none'" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                    <p class="font-bold text-sm">
+                        <span class="lang-en">Global Logistics & Sourcing Infrastructure</span>
+                        <span class="lang-zh hidden">全球物流代采及渠道对接体系</span>
+                    </p>
+                    <p class="text-xs text-slate-300 mt-1">
+                        <span class="lang-en">Real-time processing for on-demand requests.</span>
+                        <span class="lang-zh hidden">按需快速检索，保障高效流转。</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -304,7 +305,7 @@
                             <span class="lang-en">Phone *</span>
                             <span class="lang-zh hidden">电话 *</span>
                         </label>
-                        <input type="text" id="rfq-phone" required placeholder="(123) 456-7890" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
+                        <input type="text" id="rfq-phone" required placeholder="(401) 339-5938" class="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-brand-blue">
                     </div>
                 </div>
 
@@ -402,7 +403,7 @@
                 </div>
             </div>
 
-            <!-- 全球真实办公室地址 (必须与 ICSource 申请资料一致) -->
+            <!-- 全球真实办公室地址 -->
             <div class="space-y-4">
                 <h4 class="text-white font-bold uppercase tracking-wider text-xs">
                     <span class="lang-en">Contact & Location</span>
@@ -411,7 +412,7 @@
                 <div class="space-y-2 leading-relaxed">
                     <p>
                         <strong class="text-white block">Registered Address:</strong>
-                        24202 SE 20th, Sammamish, WA, 98075
+                        24202 SE 20th St, Sammamish, WA, 98075
                     </p>
                     <p>
                         <strong class="text-white">Phone:</strong> (401) 339-5938
@@ -439,39 +440,31 @@
             menu.classList.toggle('hidden');
         }
 
-        // 简易多语言管理器
-        let currentLang = 'en'; // 默认开启英文 (ICSource 审核需要首屏是英文)
+        // 双语无缝切换引擎 (默认英文)
+        let currentLang = 'en'; 
 
         function setLanguage(lang) {
             currentLang = lang;
-            
             const enElements = document.querySelectorAll('.lang-en');
             const zhElements = document.querySelectorAll('.lang-zh');
             
+            const enBtn = document.getElementById('lang-en-btn');
+            const zhBtn = document.getElementById('lang-zh-btn');
+
             if (lang === 'en') {
-                // 显示英文，隐藏中文
                 enElements.forEach(el => el.classList.remove('hidden'));
                 zhElements.forEach(el => el.classList.add('hidden'));
-
-                // 高亮桌面端按钮
-                document.getElementById('lang-btn-en').className = "px-2.5 py-1 rounded text-xs font-bold bg-brand-blue text-white transition";
-                document.getElementById('lang-btn-zh').className = "px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900 transition";
                 
-                // 高亮移动端按钮
-                document.getElementById('lang-btn-en-mobile').className = "px-2 py-0.5 rounded text-[10px] font-bold bg-brand-blue text-white transition";
-                document.getElementById('lang-btn-zh-mobile').className = "px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 transition";
+                // 激活 EN 按钮高亮，还原中文按钮状态
+                enBtn.className = "px-2.5 py-1 rounded transition bg-brand-blue text-white";
+                zhBtn.className = "px-2.5 py-1 rounded transition text-slate-600 hover:bg-slate-200";
             } else {
-                // 显示中文，隐藏英文
                 enElements.forEach(el => el.classList.add('hidden'));
                 zhElements.forEach(el => el.classList.remove('hidden'));
-
-                // 高亮桌面端按钮
-                document.getElementById('lang-btn-en').className = "px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900 transition";
-                document.getElementById('lang-btn-zh').className = "px-2.5 py-1 rounded text-xs font-bold bg-brand-blue text-white transition";
-
-                // 高亮移动端按钮
-                document.getElementById('lang-btn-en-mobile').className = "px-2 py-0.5 rounded text-[10px] font-bold text-slate-600 transition";
-                document.getElementById('lang-btn-zh-mobile').className = "px-2 py-0.5 rounded text-[10px] font-bold bg-brand-blue text-white transition";
+                
+                // 激活 中文 按钮高亮，还原 EN 按钮状态
+                zhBtn.className = "px-2.5 py-1 rounded transition bg-brand-blue text-white";
+                enBtn.className = "px-2.5 py-1 rounded transition text-slate-600 hover:bg-slate-200";
             }
         }
 
